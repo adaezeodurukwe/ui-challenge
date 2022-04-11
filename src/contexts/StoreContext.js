@@ -32,7 +32,7 @@ export const StoreContextProvider = ({ children }) => {
     cart.forEach((item) => {
       currenttotal += item.price * item.quantity;
     });
-    setTotal(currenttotal);
+    setTotal(currenttotal.toFixed(2));
   };
 
   const getData = () => {
@@ -71,7 +71,7 @@ export const StoreContextProvider = ({ children }) => {
       book.quantity = value;
       setCart(cartCopy);
     } else {
-      alert(`${book.title} is sold out`);
+      alert(`${book.title} has only ${book.available_copies - book.quantity} copies left`);
     }
   };
 

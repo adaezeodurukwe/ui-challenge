@@ -67,7 +67,7 @@ const Sidebar = () => {
                             +
                           </button>
                         </div>
-                        <b className="mt-2">${book.price * book.quantity}</b>
+                        <b className="mt-2">${(book.price * book.quantity).toFixed(2)}</b>
                       </div>
                     </div>
                   </div>
