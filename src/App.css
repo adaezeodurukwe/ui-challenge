@@ -1,9 +1,22 @@
+::-webkit-scrollbar {
+  display: none;
+}
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 main {
   width: 95%;
   margin: auto;
+  margin-top: 5rem;
+}
+
+main .inner {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px;
+  margin-top: 2rem;
 }
 
 button {
@@ -33,11 +46,18 @@ header .inner {
   margin: auto;
 }
 
-.react-multi-carousel-item{
-  max-width: 250px !important;
-  min-width: 250px !important;
+.slide-info {
+  background: black;
+  opacity: 0.9;
+  color: #ffffff;
+  bottom: 0;
+  top: 0;
+  width: 190px;
 }
 
+/* .search {
+  visibility: visible;
+} */
 
 .search input {
   border: 1px solid #dddddd;
@@ -93,6 +113,14 @@ header .inner {
   font-size: 12px;
 }
 
+.text-xl {
+  font-size: 24px;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
 .ml-4 {
   margin-left: 1rem;
 }
@@ -115,8 +143,20 @@ header .inner {
   margin-top: 0.5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .items-center {
@@ -131,12 +171,49 @@ header .inner {
   justify-content: space-between;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
 .text-green {
   color: #65c100;
 }
 
+.text-red {
+  color: #c14d00;
+}
+
 .text-gray {
   color: #aaaaaa;
+}
+
+.text-white {
+  color: white;
+}
+
+.items {
+  height: 60vh;
+  overflow: scroll;
+}
+
+.remove {
+  display: none;
+}
+
+.cart-item {
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.cart-header {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
 }
 
 .show {
@@ -147,15 +224,64 @@ header .inner {
 .hide {
   animation: fadeOut 1s ease-in-out;
   visibility: hidden;
-  
+}
+
+.proceed {
+  color: white;
+  background: #000000;
+  height: 50px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.proceed .cart {
+  left: 16px;
+}
+
+.controls input,
+.controls button {
+  height: 30px;
+  width: 30px;
+  border: 1px solid #dddddd;
+}
+
+.controls button {
+  background: #f9f9fb;
+}
+
+.controls input {
+  padding-left: 2px;
+  border-width: 1px 0;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 4px;
+  border-radius: 4px;
+  background: #dddddd;
+}
+
+.dot.active {
+  background: #65c100;
+}
+
+.slider-container-custom {
+  height: 25rem !important;
+}
+
+.react-multi-carousel-list {
+  height: 100% !important;
+  background: #ffffff;
 }
 
 .indicator {
   background: #65c100;
-  width: 0.875rem;
-  height: 0.875rem;
-  font-size: 0.5rem;
-  top: 0;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.75rem;
+  top: -5px;
   right: 0;
   color: white;
   border-radius: 0.5rem;
@@ -167,6 +293,9 @@ header .inner {
   position: fixed;
   z-index: 100;
   display: flex;
+  top: 0;
+  left: 0;
+  bottom: 0;
   justify-content: flex-end;
 }
 
@@ -174,20 +303,23 @@ header .inner {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #f5f5f4;
+  background: #666666;
   opacity: 0.5;
   z-index: 101;
 }
 
 .drawer {
   margin-right: 0;
-  padding: 2rem;
   position: relative;
-  width: 40%;
+  width: 50%;
   height: 100vh;
   animation: slidein 0.5s;
-  background: #f2f2ef;
+  background: #ffffff;
   z-index: 10000;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .cart-items {
@@ -195,14 +327,13 @@ header .inner {
   overflow: scroll;
 }
 
-
 @keyframes slidein {
   from {
     width: 0;
   }
 
   to {
-    width: 40%;
+    width: 50%;
   }
 }
 
@@ -237,26 +368,58 @@ header .inner {
 }
 
 @media only screen and (max-width: 1024px) {
-  main {
+  main .inner {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .search input {
+    width: 200px;
   }
 }
 
 @media only screen and (max-width: 760px) {
   .drawer {
-    padding: 1rem;
     width: 70%;
     animation: slideinResponsive 0.5s;
   }
-  main {
+  .md-flex-col {
+    flex-direction: column;
+  }
+  .md-flex-row {
+    flex-direction: row;
+  }
+  .md-items-center {
+    align-items: center;
+  }
+  main .inner {
     grid-template-columns: none;
     justify-content: center;
   }
   .search input {
-    display: none;
-  }  
-  .search button {
-    background: transparent;
-    border: none;
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .form-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+    height: 100px;
+    padding-top: 1.5rem;
+  }
+
+  .form-container.hidden {
+    visibility: hidden;
+  }
+
+  .search input {
+    width: 180px;
+  }
+  .remove {
+    display: block;
   }
 }

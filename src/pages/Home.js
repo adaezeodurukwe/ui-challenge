@@ -1,38 +1,32 @@
-import React from 'react'
-import { useEffect } from 'react';
-import '../App.css';
-import Body from '../components/Body';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import Slider from '../components/Slider';
-import { useStoreContextProvider } from '../contexts/StoreContext';
+import React from "react";
+import { useEffect } from "react";
+import "../App.css";
+import Body from "../components/Body";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import Slider from "../components/Slider";
+import { useStoreContextProvider } from "../contexts/StoreContext";
 
 const Home = () => {
-  const { getData, open, setOpen, searchTerm } = useStoreContextProvider();
+  const { getData, open, setOpen, searchTerm, allBooks } =
+    useStoreContextProvider();
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
-
-  const getPercents = (index) => {
-
-  }
 
   return (
     <div className="App">
-      <Sidebar
-        open={open}
-        setOpen={setOpen}
-      />
+      <Sidebar open={open} setOpen={setOpen} />
 
       <Header />
 
-      {!searchTerm && <Slider />}
+      {!searchTerm && <Slider books={allBooks} />}
 
       <Body />
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
