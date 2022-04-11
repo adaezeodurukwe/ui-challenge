@@ -4,6 +4,7 @@ export const StoreContext = createContext();
 export const StoreContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [books, setbooks] = useState([]);
+  const [featuredBooks, setFeaturedbooks] = useState([]);
   const [allBooks, setAllbooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
@@ -45,6 +46,7 @@ export const StoreContextProvider = ({ children }) => {
       .then((json) => {
         setbooks(json.data);
         setAllbooks(json.data);
+        setFeaturedbooks(json.data.filter(book => book.featured === true))
       });
   };
 
@@ -95,6 +97,7 @@ export const StoreContextProvider = ({ children }) => {
         setOpen,
         total,
         allBooks,
+        featuredBooks
       }}
     >
       {children}

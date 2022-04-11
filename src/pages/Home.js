@@ -8,7 +8,7 @@ import Slider from "../components/Slider";
 import { useStoreContextProvider } from "../contexts/StoreContext";
 
 const Home = () => {
-  const { getData, open, setOpen, searchTerm, allBooks } =
+  const { getData, open, setOpen, searchTerm, featuredBooks } =
     useStoreContextProvider();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Home = () => {
 
       <Header />
 
-      {!searchTerm && <Slider books={allBooks} />}
+      {!searchTerm && <Slider books={featuredBooks} />}
 
       <Body />
     </div>

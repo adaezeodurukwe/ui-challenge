@@ -63,7 +63,7 @@ const Body = () => {
 
                             return (
                               <RatingComponent
-                                gradId={`${Math.random()}`}
+                                gradid={`${Math.random()}`}
                                 key={index}
                                 fill={index + 1 <= whole ? 100 : remainder * 10}
                               />
