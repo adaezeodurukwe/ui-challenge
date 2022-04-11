@@ -46,7 +46,7 @@ export const StoreContextProvider = ({ children }) => {
       .then((json) => {
         setbooks(json.data);
         setAllbooks(json.data);
-        setFeaturedbooks(json.data.filter(book => book.featured === true))
+        setFeaturedbooks(json.data.filter((book) => book.featured === true));
       });
   };
 
@@ -71,7 +71,11 @@ export const StoreContextProvider = ({ children }) => {
       book.quantity = value;
       setCart(cartCopy);
     } else {
-      alert(`${book.title} has only ${book.available_copies - book.quantity} copies left`);
+      alert(
+        `${book.title} has only ${
+          book.available_copies - book.quantity
+        } copies left`
+      );
     }
   };
 
@@ -97,7 +101,7 @@ export const StoreContextProvider = ({ children }) => {
         setOpen,
         total,
         allBooks,
-        featuredBooks
+        featuredBooks,
       }}
     >
       {children}

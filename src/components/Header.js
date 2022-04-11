@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { useStoreContextProvider } from '../contexts/StoreContext';
-import SvgComponent from './SvgComponent';
-import Logo from "../assets/logo.svg"
+import React, { useState } from "react";
+import { useStoreContextProvider } from "../contexts/StoreContext";
+import SvgComponent from "./SvgComponent";
+import Logo from "../assets/logo.svg";
 
 const Header = () => {
-  const [show, setShow] = useState(false)
-  const { searchTerm, setSearchTerm, cart, setOpen } = useStoreContextProvider();
+  const [show, setShow] = useState(false);
+  const { searchTerm, setSearchTerm, cart, setOpen } =
+    useStoreContextProvider();
 
   return (
     <header className="">
@@ -25,7 +26,11 @@ const Header = () => {
             </button>
 
             <form className="search flex items-center">
-              <input onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} placeholder="Search books by title..." />
+              <input
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
+                placeholder="Search books by title..."
+              />
             </form>
           </div>
         </div>
@@ -35,7 +40,10 @@ const Header = () => {
         </button>
 
         <div className="flex items-center">
-          <SvgComponent name="logo-light" width="50" height="50" />
+          <button onClick={() => setSearchTerm("")}>
+            <SvgComponent name="logo-light" width="50" height="50" />
+          </button>
+
           <button className="ml-4 relative" onClick={() => setOpen(true)}>
             <span className="indicator absolute flex items-center justify-center">
               {cart.length}
@@ -45,8 +53,7 @@ const Header = () => {
         </div>
       </div>
     </header>
+  );
+};
 
-  )
-}
-
-export default Header
+export default Header;
