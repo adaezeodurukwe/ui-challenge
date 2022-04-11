@@ -11,17 +11,19 @@ export const StoreContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTotal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
   useEffect(() => {
     if (searchTerm) {
       const newbooks = allBooks.filter((book) =>
-        (book.title.toLowerCase().includes(searchTerm))
+        book.title.toLowerCase().includes(searchTerm)
       );
       setbooks(newbooks);
     } else {
       setbooks(allBooks);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
   const getTotal = () => {
