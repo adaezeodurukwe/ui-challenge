@@ -95,7 +95,6 @@ const Slider = ({ deviceType, books }) => {
         customTransition="all .5"
         transitionDuration={1000}
         containerClass="slider-container-custom"
-        // removeArrowOnDeviceType={["tablet", "mobile"]}
         deviceType={deviceType}
         itemClass="carousel-item-padding-40-px"
         partialVisible={true}
@@ -128,6 +127,9 @@ const Image = ({ book }) => {
       {onIt && (
         <div
           onMouseOut={() => setOnIt(false)}
+          onMouseOver={() => {
+            setOnIt(true);
+          }}
           className="absolute slide-info p-4"
         >
           <div className="flex flex-col">
