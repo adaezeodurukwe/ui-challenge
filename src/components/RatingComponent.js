@@ -1,7 +1,7 @@
 import * as React from "react"
 
 const RatingComponent = (props) => {
-  React.useEffect(() => {console.log(props);}, [])
+  // React.useEffect(() => {console.log(props);}, [])
   return (
     <svg
       width={18}

@@ -1,50 +1,49 @@
 import React from 'react'
+import { useStoreContextProvider } from '../contexts/StoreContext';
 import SvgComponent from './SvgComponent';
 
-const Sidebar = ({
-  increaseItemQuantity,
-  decreaseItemQuantity,
-  removeItem,
-  cartItems,
-  setOpen,
-  products
-}) => {
+const Sidebar = () => {
+  const { cart, modifyQuantity, remove,  open, setOpen, } = useStoreContextProvider()
+
   return (
-    <div className="sidebar">
-    <div className="backdrop" onClick={() => setOpen(false)} />
-    <div className="drawer">
-      <div>
-        <button onClick={() => setOpen(false)}>
-          <SvgComponent name="back" /> Back
+    <div className={`sidebar ${open ? "show" : "hide"}`}>
+      <div className="backdrop" onClick={() => setOpen(false)} />
+      {open && <div className="drawer">
+        <button className="flex items-center cursor-pointer" onClick={() => setOpen(false)}>
+          <SvgComponent classes="mr-2" name="back" width="18" height="18" /> Back
         </button>
-      </div>
-      <h6>YOUR CART</h6>
-      {cartItems[0] ? <div className="cart-items">
-        {cartItems.map(product => (
-          <div key={product.id} className="cart-item my-2">
-            <div className="cart-item-header">
-              <span className="cart-item-title">{product.title}</span>
-              <button onClick={() => removeItem(product.id)}>
-                Remove Item
-              </button></div>
-            <div className="cart-item-body">
-              <div className="button-container">
-                <button onClick={() => decreaseItemQuantity(product.quantity, product.id)}>-</button>
-                <span>{product.quantity}</span>
-                <button onClick={() => increaseItemQuantity(product.id)}>+</button>
+        <h6>YOUR CART</h6>
+        {cart[0] ? <div className="cart-items">
+          {cart.map((book, index) => (
+            <div key={book.id} className="flex justify-between my-2">
+              <div className="flex">
+                <img width="40" src={book.image_url} alt="product" />
+                <div className="flex flex-col">
+                  <span className="">{book.title}</span>
+                  <button onClick={() => remove(index)}>
+                    Remove
+                  </button>
+                </div>
               </div>
-              <span>{products && products[0] ? products[product.index].price : ""}</span>
-              <img width="40" src={product.image_url} alt="product" />
+              <div className="flex flex-col">
+                <span>${book.price}</span>
+                <div className="">
+                  <button onClick={() => modifyQuantity(index, book.quantity - 1)}>-</button>
+                  <input onChange={(e) => modifyQuantity(index, e.target.value)} value={book.quantity} />
+                  <button onClick={() => modifyQuantity(index, book.quantity + 1)}>+</button>
+                </div>
+                <span>${book.price * book.quantity}</span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div> : <div className="empty-cart">You have no item in your cart</div>}
-      
-      <div className="total">
-       
+          ))}
+        </div> : <div className="empty-cart">You have no item in your cart</div>}
+
+        <div className="total">
+
+        </div>
       </div>
+      }
     </div>
-  </div>
 
   )
 }
