@@ -79,8 +79,9 @@ export const StoreContextProvider = ({ children }) => {
       item.quantity = 1;
       item.index = cart.length;
       setCart([...cart, item]);
+      setOpen(true)
     } else {
-      alert(`${item.title} is sold out`);
+      alert(`${item.title} is out of stock`);
     }
   };
 
@@ -91,6 +92,7 @@ export const StoreContextProvider = ({ children }) => {
     if (value <= book.available_copies) {
       book.quantity = value;
       setCart(cartCopy);
+      setOpen(true)
     } else {
       alert(
         `${book.title} has only ${

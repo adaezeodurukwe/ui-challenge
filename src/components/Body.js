@@ -4,7 +4,8 @@ import RatingComponent from "./RatingComponent";
 import SvgComponent from "./SvgComponent";
 
 const Body = () => {
-  const { books, searchTerm, addItem, isSearchPage } = useStoreContextProvider();
+  const { books, searchTerm, addItem, isSearchPage } =
+    useStoreContextProvider();
 
   return (
     <main>
@@ -55,13 +56,19 @@ const Body = () => {
                 </span>
                 <span className="flex my-2">
                   <span>$ {book.price}</span>
-                  <span className="ml-4 text-green">
-                    {`${
-                      !book.quantity
-                        ? book.available_copies
-                        : book.available_copies - book.quantity
-                    }`}{" "}
-                    copies available
+                  <span
+                    className={`ml-4 ${
+                      !book.available_copies ? "text-red" : "text-green"
+                    }`}
+                  >
+                    {!book.available_copies
+                      ? "Out of stock"
+                      : `${
+                          book.quantity
+                            ? book.available_copies - book.quantity
+                            : book.available_copies
+                        }
+                         copies available`}
                   </span>
                 </span>
                 <button
