@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import "../App.css";
 import Body from "../components/Body";
 import Header from "../components/Header";
@@ -8,19 +7,13 @@ import Slider from "../components/Slider";
 import { useStoreContextProvider } from "../contexts/StoreContext";
 
 const Home = () => {
-  const { getData, open, setOpen, searchTerm, featuredBooks } =
-    useStoreContextProvider();
-
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { open, setOpen, featuredBooks } = useStoreContextProvider();
 
   return (
     <div className="App">
       <Sidebar open={open} setOpen={setOpen} />
       <Header />
-      {!searchTerm && <Slider books={featuredBooks} />}
+      <Slider books={featuredBooks} />
       <Body />
     </div>
   );

@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-const RatingComponent = (props) => {  
+const Star = (props) => {
   return (
     <svg
       width={18}
@@ -12,12 +12,12 @@ const RatingComponent = (props) => {
       <defs>
         <linearGradient id={props.gradid}>
           <stop
-            offset={`${props.fill}%`} 
-            style={{stopColor:"#EBA430", stopOpacity:1}}
+            offset={`${props.fill}%`}
+            style={{ stopColor: "#EBA430", stopOpacity: 1 }}
           />
           <stop
-            offset={`${(100 - props.fill)}%`}
-            style={{stopColor:"#DDDDDD", stopOpacity:1}}
+            offset={`${100 - props.fill}%`}
+            style={{ stopColor: "#DDDDDD", stopOpacity: 1 }}
           />
         </linearGradient>
       </defs>
@@ -28,7 +28,28 @@ const RatingComponent = (props) => {
         fill={`url(#${props.gradid})`}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default RatingComponent
+const RatingComponent = ({ book }) => {
+  return (
+    <div>
+      {Array(5)
+        .fill()
+        .map((value, index) => {
+          const whole = parseInt(book.rating);
+          const remainder = parseInt(book.rating.toString().split(".")[1]);
+
+          return (
+            <Star
+              gradid={`${Math.random()}`}
+              key={index}
+              fill={index + 1 <= whole ? 100 : remainder * 10}
+            />
+          );
+        })}
+    </div>
+  );
+};
+
+export default RatingComponent;

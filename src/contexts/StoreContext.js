@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 export const StoreContext = createContext();
 
 export const StoreContextProvider = ({ children }) => {
+  const { pathname } = useLocation();
   const [cart, setCart] = useState([]);
   const [books, setbooks] = useState([]);
   const [featuredBooks, setFeaturedbooks] = useState([]);
@@ -9,6 +11,12 @@ export const StoreContextProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
   const [total, setTotal] = useState(false);
+  const isSearchPage = pathname.includes("search");
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     getTotal();
@@ -16,16 +24,29 @@ export const StoreContextProvider = ({ children }) => {
   }, [cart]);
 
   useEffect(() => {
+    if (!searchTerm) {
+      setbooks(allBooks);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm]);
+
+  const searchForBook = () => {
     if (searchTerm) {
-      const newbooks = allBooks.filter((book) =>
-        book.title.toLowerCase().includes(searchTerm)
+      const newbooks = allBooks.filter(
+        (book) =>
+          book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.tags.filter((tag) =>
+            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )[0] ||
+          book.authors.filter((author) =>
+            author.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )[0]
       );
       setbooks(newbooks);
     } else {
       setbooks(allBooks);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm]);
+  };
 
   const getTotal = () => {
     let currenttotal = 0;
@@ -102,6 +123,8 @@ export const StoreContextProvider = ({ children }) => {
         total,
         allBooks,
         featuredBooks,
+        searchForBook,
+        isSearchPage,
       }}
     >
       {children}
@@ -111,7 +134,6 @@ export const StoreContextProvider = ({ children }) => {
 
 export const useStoreContextProvider = () => {
   const context = useContext(StoreContext);
-
   return context;
 };
 

@@ -195,6 +195,14 @@ header .inner {
   color: white;
 }
 
+.fill-home {
+  color: #F9F9FB
+}
+
+.fill-search {
+  color: #FFF
+}
+
 .items {
   height: 60vh;
   overflow: scroll;
@@ -237,6 +245,10 @@ header .inner {
 
 .proceed .cart {
   left: 16px;
+}
+
+.controls {
+  display: flex;
 }
 
 .controls input,
@@ -363,7 +375,7 @@ header .inner {
   }
 
   to {
-    width: 70%;
+    width: 100%;
   }
 }
 
@@ -378,17 +390,8 @@ header .inner {
 
 @media only screen and (max-width: 760px) {
   .drawer {
-    width: 70%;
+    width: 100%;
     animation: slideinResponsive 0.5s;
-  }
-  .md-flex-col {
-    flex-direction: column;
-  }
-  .md-flex-row {
-    flex-direction: row;
-  }
-  .md-items-center {
-    align-items: center;
   }
   main .inner {
     grid-template-columns: none;
@@ -410,6 +413,14 @@ header .inner {
     z-index: 1000;
     height: 100px;
     padding-top: 1.5rem;
+  }
+
+  .sm-p-4 {
+    padding: 1rem;
+  }
+
+  .sm-text-xs {
+    font-size: 0.75rem;
   }
 
   .form-container.hidden {

@@ -11,7 +11,7 @@ const Sidebar = () => {
       <div className="backdrop" onClick={() => setOpen(false)} />
       {open && (
         <div className="drawer">
-          <div className="flex justify-between items-center cart-header p-8">
+          <div className="flex justify-between items-center cart-header p-8 sm-p-4">
             <button
               className="flex items-center cursor-pointer"
               onClick={() => setOpen(false)}
@@ -25,25 +25,25 @@ const Sidebar = () => {
             </h5>
           </div>
           {cart[0] ? (
-            <div className="p-8">
+            <div className="p-8 sm-p-4">
               <div className="items">
                 {cart.map((book, index) => (
                   <div className="cart-item">
                     <div
                       key={book.id}
-                      className="flex md-flex-col justify-between my-2"
+                      className="flex justify-between my-2"
                     >
                       <div className="flex">
                         <img width="70" src={book.image_url} alt="product" />
                         <div className="flex flex-col ml-4 justify-between items-start">
-                          <span className="flex flex-col">
+                          <span className="flex text-sm sm-text-xs flex-col">
                             <b>{book.title}</b>
-                            {book.authors[0].name}
+                            <span className="mt-2">{book.authors[0].name}</span>
                           </span>
                           <button onClick={() => remove(index)}>Remove</button>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-between items-end md-flex-row md-items-center">
+                      <div className="flex flex-col text-sm sm-text-xs justify-between items-end md-items-center">
                         <span>${book.price}</span>
                         <div className="controls my-2">
                           <button

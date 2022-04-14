@@ -4,11 +4,11 @@ import RatingComponent from "./RatingComponent";
 import SvgComponent from "./SvgComponent";
 
 const Body = () => {
-  const { books, searchTerm, addItem } = useStoreContextProvider();
+  const { books, searchTerm, addItem, isSearchPage } = useStoreContextProvider();
 
   return (
     <main>
-      {searchTerm ? (
+      {searchTerm && isSearchPage ? (
         <h4>
           {books.length} <span className="thin">results found for</span>{" "}
           {searchTerm}
@@ -50,27 +50,7 @@ const Body = () => {
 
                   <span className="flex flex-col justify-center ">
                     <span>Rating: {book.rating}</span>
-                    <span>
-                      <span>
-                        {Array(5)
-                          .fill()
-                          .map((value, index) => {
-                            // 4.5 - 1
-                            const whole = parseInt(book.rating);
-                            const remainder = parseInt(
-                              book.rating.toString().split(".")[1]
-                            );
-
-                            return (
-                              <RatingComponent
-                                gradid={`${Math.random()}`}
-                                key={index}
-                                fill={index + 1 <= whole ? 100 : remainder * 10}
-                              />
-                            );
-                          })}
-                      </span>
-                    </span>
+                    <RatingComponent book={book} />
                   </span>
                 </span>
                 <span className="flex my-2">

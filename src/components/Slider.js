@@ -47,7 +47,7 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
         opacity: 0.5,
         width: "30px",
         position: "absolute",
-        zIndex: "100",
+        zIndex: "10",
         left: 0,
         display: "flex",
         justifyContent: "center",
@@ -75,7 +75,7 @@ const responsive = {
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    slidesToSlide: 1, // optional, default to 1.
+    slidesToSlide: 2, // optional, default to 1.
   },
 };
 const Slider = ({ deviceType, books }) => {
@@ -83,8 +83,6 @@ const Slider = ({ deviceType, books }) => {
     <div className="slider-container-custom">
       <h4>Featured books</h4>
       <Carousel
-        swipeable={false}
-        draggable={false}
         showDots={true}
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
@@ -94,9 +92,7 @@ const Slider = ({ deviceType, books }) => {
         keyBoardControl={true}
         customTransition="all .5"
         transitionDuration={1000}
-        containerClass="slider-container-custom"
         deviceType={deviceType}
-        itemClass="carousel-item-padding-40-px"
         partialVisible={true}
         customRightArrow={<CustomRightArrow />}
         customLeftArrow={<CustomLeftArrow />}
@@ -113,7 +109,15 @@ const Slider = ({ deviceType, books }) => {
 const Image = ({ book }) => {
   const [onIt, setOnIt] = useState(false);
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      style={{
+        width: "220px",
+        height: "330px",
+        marginRight: "auto",
+        marginLeft: "auto"
+      }}
+    >
       <img
         className="image"
         width="220"
@@ -156,7 +160,7 @@ const Image = ({ book }) => {
                 ))}
               </div>
             </div>
-            <span className="flex my-2">
+            <div className="flex my-2">
               <span className="flex">
                 <span className="flex flex-col justify-center items-center text-white">
                   <SvgComponent name="people" width="24" height="24" />
@@ -170,31 +174,11 @@ const Image = ({ book }) => {
 
               <span className="vertical-line mr-4 ml-4"></span>
 
-              <span className="flex flex-col justify-center ">
+              <div className="flex flex-col justify-center ">
                 <span>Rating: {book.rating}</span>
-                <span>
-                  <span>
-                    {Array(5)
-                      .fill()
-                      .map((value, index) => {
-                        // 4.5 - 1
-                        const whole = parseInt(book.rating);
-                        const remainder = parseInt(
-                          book.rating.toString().split(".")[1]
-                        );
-                        const fill = index + 1 <= whole ? 100 : remainder * 10;
-                        return (
-                          <RatingComponent
-                            gradid={`${Math.random()}`}
-                            key={index}
-                            fill={fill}
-                          />
-                        );
-                      })}
-                  </span>
-                </span>
-              </span>
-            </span>
+                <RatingComponent book={book} />
+              </div>
+            </div>
           </div>
         </div>
       )}
